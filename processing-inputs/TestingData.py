@@ -130,10 +130,7 @@ class TestingData:
                     "Force_N": force,
                 }
 
-                self.cleaned_df = self.cleaned_df.append(
-                    cleanedRow,
-                    ignore_index=True,
-                )
+                self.cleaned_df = self.cleaned_df.append(cleanedRow, ignore_index=True)
 
         self.cleaned_df = self.cleaned_df.dropna(
             subset=["Extension_mm", "Force_N"], how="all"
@@ -237,9 +234,7 @@ class TestingData:
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
         fig = plt.figure()
-        ax = fig.add_subplot(
-            111,
-        )
+        ax = fig.add_subplot(111)
 
         self.formatChart(fig, ax, specimen)
 
@@ -347,7 +342,7 @@ class TestingData:
 
     # Called when class is initialized. Checks if checks if processed dataframe is generated and loads it to a database table.
     def output(self, material, db, user, pw, host):
-        engine = create_engine(f"mysql+pymysql://{user}:{pw}@{host}/{db}")
+        engine = create_engine("mysql+pymysql://{}:{}@{}/{}".format(user, pw, host, db))
         dbConnection = engine.connect()
 
         if self.processed_df.isnull().values.any():
