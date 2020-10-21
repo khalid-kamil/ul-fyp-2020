@@ -130,14 +130,12 @@ class TestingData:
                     "Force_N": force,
                 }
 
-                self.cleaned_df = self.cleaned_df.append(
-                    cleanedRow,
-                    ignore_index=True,
-                )
+                self.cleaned_df = self.cleaned_df.append(cleanedRow, ignore_index=True)
 
         self.cleaned_df = self.cleaned_df.dropna(
             subset=["Extension_mm", "Force_N"], how="all"
         ).reset_index(drop=True)
+        self.cleaned_df.to_csv("outputs/cleaned-data.csv", index=False)
         print("Data cleaned successfully.")
 
     # Called in load() function. Loads data into dataframe once confirmed to exist using isValidDirectory() function.
@@ -237,9 +235,7 @@ class TestingData:
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
         fig = plt.figure()
-        ax = fig.add_subplot(
-            111,
-        )
+        ax = fig.add_subplot(111)
 
         self.formatChart(fig, ax, specimen)
 
