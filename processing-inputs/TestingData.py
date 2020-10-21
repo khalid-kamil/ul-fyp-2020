@@ -286,13 +286,12 @@ class TestingData:
                 "Max-Load_N",
                 "Work-To-Failure_Nmm",
                 "Plot-Directory",
-                "Welding-Conditions",
-                "Welding-Energy",
-                "Vibration-Amplitude",
-                "Clamping-Pressure",
-                "Peak-Power",
-                "Collapse",
-                "Time",
+                "Welding-Energy_J",
+                "Vibration-Amplitude_\u03BCm",
+                "Clamping-Pressure_MPa",
+                "Peak-Power_W",
+                "Collapse_mm",
+                "Time_s",
             ]
         )
 
@@ -325,13 +324,12 @@ class TestingData:
                 "Max-Load_N": self.maxLoad,
                 "Work-To-Failure_Nmm": self.workToFailure,
                 "Plot-Directory": self.plotDirectory,
-                "Welding-Conditions": self.welding_df.iloc[specimen][0],
-                "Welding-Energy": self.welding_df.iloc[specimen][1],
-                "Vibration-Amplitude": self.welding_df.iloc[specimen][2],
-                "Clamping-Pressure": self.welding_df.iloc[specimen][3],
-                "Peak-Power": self.welding_df.iloc[specimen][4],
-                "Collapse": self.welding_df.iloc[specimen][5],
-                "Time": self.welding_df.iloc[specimen][6],
+                "Welding-Energy_J": self.welding_df.iloc[specimen][1],
+                "Vibration-Amplitude_\u03BCm": self.welding_df.iloc[specimen][2],
+                "Clamping-Pressure_MPa": self.welding_df.iloc[specimen][3],
+                "Peak-Power_W": self.welding_df.iloc[specimen][4],
+                "Collapse_mm": self.welding_df.iloc[specimen][5],
+                "Time_s": self.welding_df.iloc[specimen][6],
             }
 
             # Add processed data to new dataframe
