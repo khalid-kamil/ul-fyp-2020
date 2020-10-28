@@ -43,6 +43,7 @@ class TestingData:
         material,
         source,
         welding,
+        bondarea,
         db="materialtestsDB",
         user="khalid",
         pw="fyp2020",
@@ -63,6 +64,7 @@ class TestingData:
         self.material = material
         self.source = source
         self.welding = welding
+        self.bondarea = bondarea
         self.db = db
         self.user = user
         self.pw = pw
@@ -130,14 +132,15 @@ class TestingData:
                     "Force_N": force,
                 }
 
-                self.cleaned_df = self.cleaned_df.append(
-                    cleanedRow,
-                    ignore_index=True,
-                )
+                self.cleaned_df = self.cleaned_df.append(cleanedRow, ignore_index=True)
 
         self.cleaned_df = self.cleaned_df.dropna(
             subset=["Extension_mm", "Force_N"], how="all"
         ).reset_index(drop=True)
+        self.testDataDirectory = "outputs/{} - Bond Area {}mm^2 - Cleaned.csv".format(
+            self.material, self.bondarea
+        )
+        self.cleaned_df.to_csv(self.testDataDirectory, index=False)
         print("Data cleaned successfully.")
 
     # Called in load() function. Loads data into dataframe once confirmed to exist using isValidDirectory() function.
@@ -237,9 +240,7 @@ class TestingData:
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
         fig = plt.figure()
-        ax = fig.add_subplot(
-            111,
-        )
+        ax = fig.add_subplot(111)
 
         self.formatChart(fig, ax, specimen)
 
@@ -284,20 +285,18 @@ class TestingData:
         self.processed_df = pd.DataFrame(
             columns=[
                 "Specimen_no",
-                "Curve_no",
                 "Thickness_mm",
-                "Width_mm",
+                "Welding-Energy_J",
+                "Vibration-Amplitude_\u03BCm",
+                "Clamping-Pressure_MPa",
+                "Peak-Power_W",
+                "Collapse_mm",
+                "Time_s",
                 "Stiffness_N/mm",
                 "Max-Load_N",
                 "Work-To-Failure_Nmm",
                 "Plot-Directory",
-                "Welding-Conditions",
-                "Welding-Energy",
-                "Vibration-Amplitude",
-                "Clamping-Pressure",
-                "Peak-Power",
-                "Collapse",
-                "Time",
+                "Test-Data-Directory",
             ]
         )
 
@@ -323,20 +322,18 @@ class TestingData:
             # Load processed data into object to append to processed dataframe
             self.processedData = {
                 "Specimen_no": self.filtered_df["Specimen_no"].iloc[0],
-                "Curve_no": self.filtered_df["Curve_no"].iloc[0],
                 "Thickness_mm": self.filtered_df["Thickness_mm"].iloc[0],
-                "Width_mm": self.filtered_df["Width_mm"].iloc[0],
+                "Welding-Energy_J": self.welding_df.iloc[specimen][1],
+                "Vibration-Amplitude_\u03BCm": self.welding_df.iloc[specimen][2],
+                "Clamping-Pressure_MPa": self.welding_df.iloc[specimen][3],
+                "Peak-Power_W": self.welding_df.iloc[specimen][4],
+                "Collapse_mm": self.welding_df.iloc[specimen][5],
+                "Time_s": self.welding_df.iloc[specimen][6],
                 "Stiffness_N/mm": self.stiffness,
                 "Max-Load_N": self.maxLoad,
                 "Work-To-Failure_Nmm": self.workToFailure,
                 "Plot-Directory": self.plotDirectory,
-                "Welding-Conditions": self.welding_df.iloc[specimen][0],
-                "Welding-Energy": self.welding_df.iloc[specimen][1],
-                "Vibration-Amplitude": self.welding_df.iloc[specimen][2],
-                "Clamping-Pressure": self.welding_df.iloc[specimen][3],
-                "Peak-Power": self.welding_df.iloc[specimen][4],
-                "Collapse": self.welding_df.iloc[specimen][5],
-                "Time": self.welding_df.iloc[specimen][6],
+                "Test-Data-Directory": self.testDataDirectory,
             }
 
             # Add processed data to new dataframe
@@ -347,7 +344,7 @@ class TestingData:
 
     # Called when class is initialized. Checks if checks if processed dataframe is generated and loads it to a database table.
     def output(self, material, db, user, pw, host):
-        engine = create_engine(f"mysql+pymysql://{user}:{pw}@{host}/{db}")
+        engine = create_engine("mysql+pymysql://{}:{}@{}/{}".format(user, pw, host, db))
         dbConnection = engine.connect()
 
         if self.processed_df.isnull().values.any():
@@ -355,7 +352,11 @@ class TestingData:
         else:
             try:
                 frame = self.processed_df.to_sql(
-                    self.material,
+                    "{} - Bond Area {}mm^2 - Thickness {}mm".format(
+                        self.material,
+                        self.bondarea,
+                        self.processed_df["Thickness_mm"].iloc[0],
+                    ),
                     con=dbConnection,
                     if_exists="append",
                     chunksize=1000,
@@ -366,11 +367,17 @@ class TestingData:
             except Exception as ex:
                 print(ex)
             else:
-                print("Data added to Table '{}' successfully.".format(self.material))
+                print(
+                    "Data added to Table '{} - Bond Area {}mm^2 - Thickness {}mm' successfully.".format(
+                        self.material,
+                        self.bondarea,
+                        self.processed_df["Thickness_mm"].iloc[0],
+                    )
+                )
             finally:
                 dbConnection.close()
 
 
 test = TestingData(
-    "Aluminium 5754-H111", "refData/Testing-Data.xlsx", "refData/Welding data.xlsx"
+    "Aluminium 5754-H111", "refData/Testing-Data.xlsx", "refData/Welding data.xlsx", 180
 )
