@@ -1,0 +1,2 @@
+Specimen_no,Curve_no,Thickness_mm,Width_mm,Stiffness_N/mm,Max-Load_N,Work-To-Failure_Nmm,Plot-Directory,Welding-Conditions,Welding-Energy,Vibration-Amplitude,Clamping-Pressure,Peak-Power,Collapse,Time
+1,1,1,1,3541.102,1152.0,307.185,outputs/plots/Load-Displacement Chart - Specimen 1.png,1,1000,45,2,860,0.18,1.56

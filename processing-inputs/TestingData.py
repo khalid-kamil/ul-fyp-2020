@@ -130,10 +130,7 @@ class TestingData:
                     "Force_N": force,
                 }
 
-                self.cleaned_df = self.cleaned_df.append(
-                    cleanedRow,
-                    ignore_index=True,
-                )
+                self.cleaned_df = self.cleaned_df.append(cleanedRow, ignore_index=True)
 
         self.cleaned_df = self.cleaned_df.dropna(
             subset=["Extension_mm", "Force_N"], how="all"
@@ -178,71 +175,73 @@ class TestingData:
         )
 
     def formatChart(self, fig, ax, specimen):
+        ax.grid(color="#000000", linestyle="-", linewidth=0.5, alpha=0.3)
+        ax.set_xlabel(
+            "Extension (mm)", family="Arial", fontsize="medium", fontweight="semibold"
+        )
+        ax.set_ylabel(
+            "Load (N)", family="Arial", fontsize="medium", fontweight="semibold"
+        )
+        ax.set_title(
+            "Ultrasonic Welded Joint Test\n{} - Specimen {}".format(
+                self.material, specimen + 1
+            ),
+            family="Arial",
+            fontsize="medium",
+            fontweight="semibold",
+        )
+        ax.set(
+            xlim=(0, 1.1 * self.filtered_df["Extension_mm"].max()),
+            ylim=(0, 1.1 * self.filtered_df["Force_N"].max()),
+        )
+        ax.xaxis.set_minor_locator(AutoMinorLocator())
+        ax.yaxis.set_minor_locator(AutoMinorLocator())
+        ax.tick_params(labelsize="small")
+
+        numeric_df = self.filtered_df(pd.to_numeric, errors="ignore")
+        ax.fill_between(
+            numeric_df["Extension_mm"],
+            0,
+            numeric_df["Force_N"],
+            facecolor="#d0c7ff",
+            alpha=0.5,
+            # label="Work to Failure = {} Mmm".format(self.workToFailure)
+            label="Work to Failure = in Mmm",
+        )
         ax.scatter(
             self.filtered_df["Extension_mm"],
             self.filtered_df["Force_N"],
-            color="#4290f5",
-            alpha=0.4,
+            s=4,
+            c="#b787b3",
+            marker="D",
+            alpha=1,
+            label="Testing Data",
         )
         ax.scatter(
             self.filtered_df["Extension_mm"][self.maxLoadId],
             self.filtered_df["Force_N"][self.maxLoadId],
-            color="red",
-            # label="Max. Load = {} N".format(self.maxLoad),
+            color="#914f66",
+            # label="Max. Load = {} N".format(self.maxLoad)
+            label="Max. Load = in N",
         )
-        # ax.fill_between(
-        #     self.filtered_df["Extension_mm"],
-        #     self.filtered_df["Force_N"],
-        #     0,
-        #     color="#4290f5",
-        #     alpha=0.2,
-        #     label="Work to Failure = {} Nmm".format(self.workToFailure),
-        # )
         best_fit_y = self.fit[0][0] * self.initialDisplacement + self.fit[0][1]
-        plt.plot(
+        ax.plot(
             self.initialDisplacement,
             best_fit_y,
             "k",
-            color="blue",
+            color="#5c2020",
             linewidth=2,
-            # label="Stiffness = {} N/mm".format(self.stiffness),
-        )
-        # Set plot labels and axis labels
-        ax.set(
-            title="Ultrasonic Welded Joint Test\n{} - Specimen {}".format(
-                self.material, specimen + 1
-            ),
-            xlabel="Extension (mm)",
-            ylabel="Force (N)",
-        )
-        plt.xlim(
-            0,
-            self.filtered_df["Extension_mm"].max()
-            + 0.1 * self.filtered_df["Extension_mm"].max(),
-        )
-        plt.ylim(
-            0,
-            self.filtered_df["Force_N"].max() + 0.1 * self.filtered_df["Force_N"].max(),
+            # label="Stiffness = {} N/mm".format(self.stiffness)
+            label="Stiffness = in N/mm",
         )
 
-        # hide top and right ticks
-        plt.axes().xaxis.tick_bottom()
-        plt.axes().yaxis.tick_left()
-        plt.grid(which="major", axis="both")
-        plt.axes().xaxis.set_minor_locator(AutoMinorLocator())
-        plt.axes().yaxis.set_minor_locator(AutoMinorLocator())
-        plt.axes().tick_params(axis="both", which="major", labelsize="small")
-        plt.legend(loc="upper left", fontsize="small", scatterpoints=1)
+        ax.legend(loc="upper left", fontsize="x-small")
 
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
         fig = plt.figure()
-        ax = fig.add_subplot(
-            111,
-        )
-
+        ax = fig.add_subplot(111)
         self.formatChart(fig, ax, specimen)
-
         fig.savefig(self.plotDirectory)
         plt.close(fig)
 
@@ -347,7 +346,7 @@ class TestingData:
 
     # Called when class is initialized. Checks if checks if processed dataframe is generated and loads it to a database table.
     def output(self, material, db, user, pw, host):
-        engine = create_engine(f"mysql+pymysql://{user}:{pw}@{host}/{db}")
+        engine = create_engine("mysql+pymysql://{}:{}@{}/{}".format(user, pw, host, db))
         dbConnection = engine.connect()
 
         if self.processed_df.isnull().values.any():
