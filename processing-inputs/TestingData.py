@@ -189,8 +189,8 @@ class TestingData:
             "Load (N)", family="Arial", fontsize="medium", fontweight="semibold"
         )
         ax.set_title(
-            "Ultrasonic Welded Joint Test\n{} - Specimen {}".format(
-                self.material, specimen + 1
+            "Ultrasonic Welded Joint Test\n{} - Specimen {}, Thickness {}mm".format(
+                self.material, specimen + 1, self.filtered_df["Thickness_mm"].iloc[0]
             ),
             family="Arial",
             fontsize="medium",
@@ -209,8 +209,7 @@ class TestingData:
             self.filtered_df.Force_N.astype(float),
             color="#a8dadc",
             alpha=0.5,
-            label="Work to Failure = {} Mmm".format(self.workToFailure)
-            # label="Work to Failure = in Mmm",
+            label="Work to Failure = {} Mmm".format(self.workToFailure),
         )
         ax.scatter(
             self.filtered_df["Extension_mm"],
@@ -315,8 +314,8 @@ class TestingData:
             self.workToFailure = self.calculateWorkToFailure()
 
             # Specify plot name and directory
-            self.plotName = "Load-Displacement Chart - Specimen {}.png".format(
-                specimen + 1
+            self.plotName = "Load-Displacement Chart - Specimen {} - Thickness {}mm.png".format(
+                specimen + 1, self.filtered_df["Thickness_mm"].iloc[0]
             )
             self.plotDirectory = "outputs/plots/{}".format(self.plotName)
 
