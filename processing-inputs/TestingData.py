@@ -198,41 +198,37 @@ class TestingData:
         ax.yaxis.set_minor_locator(AutoMinorLocator())
         ax.tick_params(labelsize="small")
 
-        numeric_df = self.filtered_df(pd.to_numeric, errors="ignore")
         ax.fill_between(
-            numeric_df["Extension_mm"],
-            0,
-            numeric_df["Force_N"],
-            facecolor="#d0c7ff",
+            self.filtered_df.Extension_mm.astype(float),
+            self.filtered_df.Force_N.astype(float),
+            color="#a8dadc",
             alpha=0.5,
-            # label="Work to Failure = {} Mmm".format(self.workToFailure)
-            label="Work to Failure = in Mmm",
+            label="Work to Failure = {} Mmm".format(self.workToFailure)
+            # label="Work to Failure = in Mmm",
         )
         ax.scatter(
             self.filtered_df["Extension_mm"],
             self.filtered_df["Force_N"],
             s=4,
-            c="#b787b3",
+            color="#457b9d",
             marker="D",
-            alpha=1,
-            label="Testing Data",
+            label="Load-Displacement",
+            # White Color Hex: #f1faee
         )
         ax.scatter(
             self.filtered_df["Extension_mm"][self.maxLoadId],
             self.filtered_df["Force_N"][self.maxLoadId],
-            color="#914f66",
-            # label="Max. Load = {} N".format(self.maxLoad)
-            label="Max. Load = in N",
+            color="#e63946",
+            label="Max. Load = {} N".format(self.maxLoad),
         )
         best_fit_y = self.fit[0][0] * self.initialDisplacement + self.fit[0][1]
         ax.plot(
             self.initialDisplacement,
             best_fit_y,
             "k",
-            color="#5c2020",
+            color="#1d3557",
             linewidth=2,
-            # label="Stiffness = {} N/mm".format(self.stiffness)
-            label="Stiffness = in N/mm",
+            label="Stiffness = {} N/mm".format(self.stiffness),
         )
 
         ax.legend(loc="upper left", fontsize="x-small")
@@ -307,6 +303,7 @@ class TestingData:
             self.filtered_df = self.cleaned_df.loc[
                 self.cleaned_df["Specimen_no"] == specimen + 1
             ].reset_index(drop=True)
+            print(self.filtered_df.info())
 
             # Calculate stiffness, max load and work to failure for individual specimen
             self.stiffness = self.calculateStiffness()
