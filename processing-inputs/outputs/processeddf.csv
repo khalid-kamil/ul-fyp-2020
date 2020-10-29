@@ -1,57 +1,57 @@
-Specimen_no,Curve_no,Thickness_mm,Width_mm,Stiffness_N/mm,Max-Load_N,Work-To-Failure_Nmm,Plot-Directory,Welding-Conditions,Welding-Energy,Vibration-Amplitude,Clamping-Pressure,Peak-Power,Collapse,Time
-1,1,1,1,3541.102,1152.0,307.185,outputs/plots/Load-Displacement Chart - Specimen 1.png,1,1000,45,2,860,0.18,1.56
-2,1,1,1,1228.12,1244.0,475.768,outputs/plots/Load-Displacement Chart - Specimen 2.png,1,1000,45,2,960,0.2,1.74
-3,1,1,1,1594.133,1192.0,430.44,outputs/plots/Load-Displacement Chart - Specimen 3.png,2,1000,45,3,980,0.24,1.43
-4,1,1,1,827.26,1189.0,518.755,outputs/plots/Load-Displacement Chart - Specimen 4.png,2,1000,45,3,900,0.25,1.4
-5,1,1,1,1324.115,1061.0,341.377,outputs/plots/Load-Displacement Chart - Specimen 5.png,3,1000,45,4,1300,0.16,1.36
-6,1,1,1,984.052,869.0,277.637,outputs/plots/Load-Displacement Chart - Specimen 6.png,3,1000,45,4,1160,0.18,1.35
-7,1,1,1,2085.251,1195.0,387.661,outputs/plots/Load-Displacement Chart - Specimen 7.png,4,1000,55,2,1100,0.2,1.38
-8.0,1.0,1.0,1.0,1546.207,996.7,274.874,outputs/plots/Load-Displacement Chart - Specimen 8.png,4,1000,55,2,1220,0.22,1.32
-9,1,1,1,2721.13,1573.0,549.288,outputs/plots/Load-Displacement Chart - Specimen 9.png,5,1000,55,3,1380,0.17,1.1
-10,1,1,1,1741.844,1182.0,369.271,outputs/plots/Load-Displacement Chart - Specimen 10.png,5,1000,55,3,1500,0.14,1.02
-11,1,1,1,1144.091,2200.0,1174.988,outputs/plots/Load-Displacement Chart - Specimen 11.png,6,1000,55,4,1460,0.18,0.93
-12,1,1,1,2252.354,1456.0,534.981,outputs/plots/Load-Displacement Chart - Specimen 12.png,6,1000,55,4,1540,0.2,0.91
-13,1,1,1,2380.768,1083.0,323.727,outputs/plots/Load-Displacement Chart - Specimen 13.png,7,1000,65,2,1360,0.14,1.12
-14,1,1,1,1690.119,1316.0,514.015,outputs/plots/Load-Displacement Chart - Specimen 14.png,7,1000,65,2,1240,0.26,1.12
-15,1,1,1,1438.538,1677.0,707.667,outputs/plots/Load-Displacement Chart - Specimen 15.png,8,1000,65,3,1780,0.19,0.88
-16,1,1,1,1462.075,1926.0,953.761,outputs/plots/Load-Displacement Chart - Specimen 16.png,8,1000,65,3,1840,0.21,0.84
-17,1,1,1,1480.41,1804.0,815.942,outputs/plots/Load-Displacement Chart - Specimen 17.png,9,1000,65,4,1480,0.34,0.82
-18,1,1,1,3533.639,2171.0,971.881,outputs/plots/Load-Displacement Chart - Specimen 18.png,9,1000,65,4,1740,0.23,0.75
-19,1,1,1,611.934,1107.0,422.635,outputs/plots/Load-Displacement Chart - Specimen 19.png,10,2250,45,2,900,0.22,4.01
-20,1,1,1,2529.862,1131.0,353.006,outputs/plots/Load-Displacement Chart - Specimen 20.png,10,2250,45,2,940,0.16,4.34
-21.0,1.0,1.0,1.0,1077.018,883.3,270.08,outputs/plots/Load-Displacement Chart - Specimen 21.png,10,2250,45,2,820,0.26,3.87
-22.0,1.0,1.0,1.0,2249.737,773.7,200.112,outputs/plots/Load-Displacement Chart - Specimen 22.png,11,2250,45,3,1040,0.15,3.3
-23,1,1,1,2415.909,1226.0,390.997,outputs/plots/Load-Displacement Chart - Specimen 23.png,11,2250,45,3,1000,0.17,3.3
-24,1,1,1,941.688,829.3,248.669,outputs/plots/Load-Displacement Chart - Specimen 24.png,12,2250,45,4,1580,0.17,2.9
-25,1,1,1,3003.303,1167.0,352.706,outputs/plots/Load-Displacement Chart - Specimen 25.png,12,2250,45,4,1380,0.2,3.04
-26,1,1,1,2415.679,1359.0,478.87,outputs/plots/Load-Displacement Chart - Specimen 26.png,13,2250,55,2,1000,0.26,3.22
-27,1,1,1,1057.841,1497.0,637.579,outputs/plots/Load-Displacement Chart - Specimen 27.png,13,2250,55,2,1240,0.17,3.18
-28,1,1,1,1641.363,1605.0,669.009,outputs/plots/Load-Displacement Chart - Specimen 28.png,14,2250,55,3,1140,0.22,2.56
-29,1,1,1,1162.489,1193.0,403.885,outputs/plots/Load-Displacement Chart - Specimen 29.png,14,2250,55,3,1380,0.15,2.41
-30,1,1,1,1289.699,2240.0,1222.042,outputs/plots/Load-Displacement Chart - Specimen 30.png,15,2250,55,4,1880,0.15,2.1
-31.0,1.0,1.0,1.0,627.7,869.3,289.722,outputs/plots/Load-Displacement Chart - Specimen 31.png,15,2250,55,4,1540,0.25,1.96
-32,1,1,1,2515.279,1473.0,557.998,outputs/plots/Load-Displacement Chart - Specimen 32.png,16,2250,65,2,1580,0.24,2.54
-33,1,1,1,986.741,1580.0,775.189,outputs/plots/Load-Displacement Chart - Specimen 33.png,16,2250,65,2,1460,0.19,2.49
-34,1,1,1,1018.837,1492.0,715.282,outputs/plots/Load-Displacement Chart - Specimen 34.png,17,2250,65,3,1640,0.14,1.99
-35,1,1,1,1668.133,1554.0,655.696,outputs/plots/Load-Displacement Chart - Specimen 35.png,17,2250,65,3,1740,0.11,2.04
-36,1,1,1,1589.51,2270.0,1403.356,outputs/plots/Load-Displacement Chart - Specimen 36.png,18,2250,65,4,1940,0.2,1.56
-37,1,1,1,2581.049,2255.0,1313.453,outputs/plots/Load-Displacement Chart - Specimen 37.png,18,2250,65,4,1900,0.19,1.48
-38.0,1.0,1.0,1.0,1946.717,865.3,224.844,outputs/plots/Load-Displacement Chart - Specimen 38.png,19,3500,45,2,760,0.26,5.01
-39.0,1.0,1.0,1.0,2073.204,670.0,155.524,outputs/plots/Load-Displacement Chart - Specimen 39.png,19,2800,45,2,740,0.25,5.01
-40,1,1,1,2896.71,1171.0,354.863,outputs/plots/Load-Displacement Chart - Specimen 40.png,19,2800,45,2,880,0.28,5.01
-41.0,1.0,1.0,1.0,3334.378,934.3,204.664,outputs/plots/Load-Displacement Chart - Specimen 41.png,20,3350,45,3,960,0.14,5.01
-42,1,1,1,2802.511,1002.0,260.529,outputs/plots/Load-Displacement Chart - Specimen 42.png,20,3350,45,3,1000,1.5,5.01
-43,1,1,1,3172.606,1048.0,271.388,outputs/plots/Load-Displacement Chart - Specimen 43.png,21,3500,45,4,1660,0.17,4.52
-44.0,1.0,1.0,1.0,1926.494,642.3,154.205,outputs/plots/Load-Displacement Chart - Specimen 44.png,21,3500,45,4,1420,0.17,4.58
-45,1,1,1,1606.288,1163.0,415.899,outputs/plots/Load-Displacement Chart - Specimen 45.png,22,3400,55,2,1240,0.18,5.01
-46,1,1,1,3114.55,1478.0,505.655,outputs/plots/Load-Displacement Chart - Specimen 46.png,22,3400,55,2,1020,0.26,5.01
-47,1,1,1,2989.922,1772.0,758.135,outputs/plots/Load-Displacement Chart - Specimen 47.png,23,3500,55,3,1520,0.18,3.6
-48,1,1,1,2874.266,1598.0,678.191,outputs/plots/Load-Displacement Chart - Specimen 48.png,23,3500,55,3,1360,0.25,3.72
-49,1,1,1,1949.804,1538.0,600.536,outputs/plots/Load-Displacement Chart - Specimen 49.png,24,3500,55,4,1400,0.25,3.06
-50,1,1,1,2690.242,1885.0,898.594,outputs/plots/Load-Displacement Chart - Specimen 50.png,24,3500,55,4,1380,0.19,2.92
-51,1,1,1,2437.482,1786.0,845.061,outputs/plots/Load-Displacement Chart - Specimen 51.png,25,3500,65,2,1200,0.3,4.14
-52,1,1,1,1595.694,1397.0,531.078,outputs/plots/Load-Displacement Chart - Specimen 52.png,25,3500,65,2,1060,0.3,4.25
-53,1,1,1,1220.38,2288.0,1409.519,outputs/plots/Load-Displacement Chart - Specimen 53.png,26,3500,65,3,1680,0.15,3.16
-54,1,1,1,2887.604,1819.0,846.0,outputs/plots/Load-Displacement Chart - Specimen 54.png,26,3500,65,3,1980,0.22,2.9
-55,1,1,1,2862.086,2363.0,1474.334,outputs/plots/Load-Displacement Chart - Specimen 55.png,27,3500,65,4,1840,0.18,2.33
-56,1,1,1,1331.496,2400.0,1783.584,outputs/plots/Load-Displacement Chart - Specimen 56.png,27,3500,65,4,2100,0.24,2.22
+Specimen_no,Thickness_mm,Welding-Energy_J,Vibration-Amplitude_\u03BCm,Clamping-Pressure_MPa,Peak-Power_W,Collapse_mm,Time_s,Stiffness_N/mm,Max-Load_N,Work-To-Failure_Nmm,Plot-Directory,Test-Data-Directory
+1,1,1000,45,2,860,0.18,1.56,3541.102,1152.0,307.185,outputs/plots/Load-Displacement Chart - Specimen 1.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+2,1,1000,45,2,960,0.2,1.74,1228.12,1244.0,475.768,outputs/plots/Load-Displacement Chart - Specimen 2.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+3,1,1000,45,3,980,0.24,1.43,1594.133,1192.0,430.44,outputs/plots/Load-Displacement Chart - Specimen 3.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+4,1,1000,45,3,900,0.25,1.4,827.26,1189.0,518.755,outputs/plots/Load-Displacement Chart - Specimen 4.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+5,1,1000,45,4,1300,0.16,1.36,1324.115,1061.0,341.377,outputs/plots/Load-Displacement Chart - Specimen 5.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+6,1,1000,45,4,1160,0.18,1.35,984.052,869.0,277.637,outputs/plots/Load-Displacement Chart - Specimen 6.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+7,1,1000,55,2,1100,0.2,1.38,2085.251,1195.0,387.661,outputs/plots/Load-Displacement Chart - Specimen 7.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+8.0,1.0,1000,55,2,1220,0.22,1.32,1546.207,996.7,274.874,outputs/plots/Load-Displacement Chart - Specimen 8.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+9,1,1000,55,3,1380,0.17,1.1,2721.13,1573.0,549.288,outputs/plots/Load-Displacement Chart - Specimen 9.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+10,1,1000,55,3,1500,0.14,1.02,1741.844,1182.0,369.271,outputs/plots/Load-Displacement Chart - Specimen 10.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+11,1,1000,55,4,1460,0.18,0.93,1144.091,2200.0,1174.988,outputs/plots/Load-Displacement Chart - Specimen 11.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+12,1,1000,55,4,1540,0.2,0.91,2252.354,1456.0,534.981,outputs/plots/Load-Displacement Chart - Specimen 12.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+13,1,1000,65,2,1360,0.14,1.12,2380.768,1083.0,323.727,outputs/plots/Load-Displacement Chart - Specimen 13.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+14,1,1000,65,2,1240,0.26,1.12,1690.119,1316.0,514.015,outputs/plots/Load-Displacement Chart - Specimen 14.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+15,1,1000,65,3,1780,0.19,0.88,1438.538,1677.0,707.667,outputs/plots/Load-Displacement Chart - Specimen 15.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+16,1,1000,65,3,1840,0.21,0.84,1462.075,1926.0,953.761,outputs/plots/Load-Displacement Chart - Specimen 16.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+17,1,1000,65,4,1480,0.34,0.82,1480.41,1804.0,815.942,outputs/plots/Load-Displacement Chart - Specimen 17.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+18,1,1000,65,4,1740,0.23,0.75,3533.639,2171.0,971.881,outputs/plots/Load-Displacement Chart - Specimen 18.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+19,1,2250,45,2,900,0.22,4.01,611.934,1107.0,422.635,outputs/plots/Load-Displacement Chart - Specimen 19.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+20,1,2250,45,2,940,0.16,4.34,2529.862,1131.0,353.006,outputs/plots/Load-Displacement Chart - Specimen 20.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+21.0,1.0,2250,45,2,820,0.26,3.87,1077.018,883.3,270.08,outputs/plots/Load-Displacement Chart - Specimen 21.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+22.0,1.0,2250,45,3,1040,0.15,3.3,2249.737,773.7,200.112,outputs/plots/Load-Displacement Chart - Specimen 22.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+23,1,2250,45,3,1000,0.17,3.3,2415.909,1226.0,390.997,outputs/plots/Load-Displacement Chart - Specimen 23.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+24,1,2250,45,4,1580,0.17,2.9,941.688,829.3,248.669,outputs/plots/Load-Displacement Chart - Specimen 24.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+25,1,2250,45,4,1380,0.2,3.04,3003.303,1167.0,352.706,outputs/plots/Load-Displacement Chart - Specimen 25.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+26,1,2250,55,2,1000,0.26,3.22,2415.679,1359.0,478.87,outputs/plots/Load-Displacement Chart - Specimen 26.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+27,1,2250,55,2,1240,0.17,3.18,1057.841,1497.0,637.579,outputs/plots/Load-Displacement Chart - Specimen 27.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+28,1,2250,55,3,1140,0.22,2.56,1641.363,1605.0,669.009,outputs/plots/Load-Displacement Chart - Specimen 28.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+29,1,2250,55,3,1380,0.15,2.41,1162.489,1193.0,403.885,outputs/plots/Load-Displacement Chart - Specimen 29.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+30,1,2250,55,4,1880,0.15,2.1,1289.699,2240.0,1222.042,outputs/plots/Load-Displacement Chart - Specimen 30.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+31.0,1.0,2250,55,4,1540,0.25,1.96,627.7,869.3,289.722,outputs/plots/Load-Displacement Chart - Specimen 31.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+32,1,2250,65,2,1580,0.24,2.54,2515.279,1473.0,557.998,outputs/plots/Load-Displacement Chart - Specimen 32.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+33,1,2250,65,2,1460,0.19,2.49,986.741,1580.0,775.189,outputs/plots/Load-Displacement Chart - Specimen 33.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+34,1,2250,65,3,1640,0.14,1.99,1018.837,1492.0,715.282,outputs/plots/Load-Displacement Chart - Specimen 34.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+35,1,2250,65,3,1740,0.11,2.04,1668.133,1554.0,655.696,outputs/plots/Load-Displacement Chart - Specimen 35.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+36,1,2250,65,4,1940,0.2,1.56,1589.51,2270.0,1403.356,outputs/plots/Load-Displacement Chart - Specimen 36.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+37,1,2250,65,4,1900,0.19,1.48,2581.049,2255.0,1313.453,outputs/plots/Load-Displacement Chart - Specimen 37.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+38.0,1.0,3500,45,2,760,0.26,5.01,1946.717,865.3,224.844,outputs/plots/Load-Displacement Chart - Specimen 38.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+39.0,1.0,2800,45,2,740,0.25,5.01,2073.204,670.0,155.524,outputs/plots/Load-Displacement Chart - Specimen 39.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+40,1,2800,45,2,880,0.28,5.01,2896.71,1171.0,354.863,outputs/plots/Load-Displacement Chart - Specimen 40.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+41.0,1.0,3350,45,3,960,0.14,5.01,3334.378,934.3,204.664,outputs/plots/Load-Displacement Chart - Specimen 41.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+42,1,3350,45,3,1000,1.5,5.01,2802.511,1002.0,260.529,outputs/plots/Load-Displacement Chart - Specimen 42.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+43,1,3500,45,4,1660,0.17,4.52,3172.606,1048.0,271.388,outputs/plots/Load-Displacement Chart - Specimen 43.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+44.0,1.0,3500,45,4,1420,0.17,4.58,1926.494,642.3,154.205,outputs/plots/Load-Displacement Chart - Specimen 44.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+45,1,3400,55,2,1240,0.18,5.01,1606.288,1163.0,415.899,outputs/plots/Load-Displacement Chart - Specimen 45.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+46,1,3400,55,2,1020,0.26,5.01,3114.55,1478.0,505.655,outputs/plots/Load-Displacement Chart - Specimen 46.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+47,1,3500,55,3,1520,0.18,3.6,2989.922,1772.0,758.135,outputs/plots/Load-Displacement Chart - Specimen 47.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+48,1,3500,55,3,1360,0.25,3.72,2874.266,1598.0,678.191,outputs/plots/Load-Displacement Chart - Specimen 48.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+49,1,3500,55,4,1400,0.25,3.06,1949.804,1538.0,600.536,outputs/plots/Load-Displacement Chart - Specimen 49.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+50,1,3500,55,4,1380,0.19,2.92,2690.242,1885.0,898.594,outputs/plots/Load-Displacement Chart - Specimen 50.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+51,1,3500,65,2,1200,0.3,4.14,2437.482,1786.0,845.061,outputs/plots/Load-Displacement Chart - Specimen 51.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+52,1,3500,65,2,1060,0.3,4.25,1595.694,1397.0,531.078,outputs/plots/Load-Displacement Chart - Specimen 52.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+53,1,3500,65,3,1680,0.15,3.16,1220.38,2288.0,1409.519,outputs/plots/Load-Displacement Chart - Specimen 53.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+54,1,3500,65,3,1980,0.22,2.9,2887.604,1819.0,846.0,outputs/plots/Load-Displacement Chart - Specimen 54.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+55,1,3500,65,4,1840,0.18,2.33,2862.086,2363.0,1474.334,outputs/plots/Load-Displacement Chart - Specimen 55.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
+56,1,3500,65,4,2100,0.24,2.22,1331.496,2400.0,1783.584,outputs/plots/Load-Displacement Chart - Specimen 56.png,outputs/Aluminium 5754-H111 - Bond Area 180mm^2 - Cleaned.csv
