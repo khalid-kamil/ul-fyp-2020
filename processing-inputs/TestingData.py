@@ -64,7 +64,7 @@ class TestingData:
         self.material = material
         self.source = source
         self.welding = welding
-        self.bondarea = bondarea
+        self.bondarea = int(bondarea)
         self.db = db
         self.user = user
         self.pw = pw
@@ -377,7 +377,3 @@ class TestingData:
             finally:
                 dbConnection.close()
 
-
-test = TestingData(
-    "Aluminium 5754-H111", "refData/Testing-Data.xlsx", "refData/Welding data.xlsx", 180
-)
