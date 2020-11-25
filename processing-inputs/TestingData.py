@@ -1,18 +1,20 @@
+from matplotlib.ticker import AutoMinorLocator
+import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
+import pymysql
+from numpy import trapz
+import numpy as np
 import sys
 import os
 from os import path
 
 # from extensions import *
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.ticker import AutoMinorLocator
+import matplotlib
+matplotlib.use('TkAgg')
+
 
 plt.style.use("classic")
-
-import numpy as np
-from numpy import trapz
-import pymysql
-from sqlalchemy import create_engine
 
 
 class TestingData:
@@ -97,7 +99,8 @@ class TestingData:
             ]
         )
 
-        self.testing_df = self.testing_df.dropna(how="all").reset_index(drop=True)
+        self.testing_df = self.testing_df.dropna(
+            how="all").reset_index(drop=True)
         self.lastRowIndex = self.testing_df.last_valid_index()
         self.index_df = self.testing_df[
             self.testing_df.iloc[:, 0] == "Curves for Specimen No:"
@@ -132,7 +135,8 @@ class TestingData:
                     "Force_N": force,
                 }
 
-                self.cleaned_df = self.cleaned_df.append(cleanedRow, ignore_index=True)
+                self.cleaned_df = self.cleaned_df.append(
+                    cleanedRow, ignore_index=True)
 
         self.cleaned_df = self.cleaned_df.dropna(
             subset=["Extension_mm", "Force_N"], how="all"
@@ -167,7 +171,8 @@ class TestingData:
         self.initialLoad = np.array(
             self.filtered_df["Force_N"][: self.initialLength], dtype=np.float64
         )
-        self.fit = np.polyfit(self.initialDisplacement, self.initialLoad, 1, cov=True)
+        self.fit = np.polyfit(self.initialDisplacement,
+                              self.initialLoad, 1, cov=True)
         return round(self.fit[0][0], 3)
 
     # Called in process() function. Calculates max load for any one specimen.
@@ -177,7 +182,8 @@ class TestingData:
     # Called in process() function. Calculates work to failure for any one specimen.
     def calculateWorkToFailure(self):
         return round(
-            trapz(self.filtered_df["Force_N"], self.filtered_df["Extension_mm"]), 3
+            trapz(self.filtered_df["Force_N"],
+                  self.filtered_df["Extension_mm"]), 3
         )
 
     def formatChart(self, fig, ax, specimen):
@@ -190,7 +196,8 @@ class TestingData:
         )
         ax.set_title(
             "Ultrasonic Welded Joint Test\n{} - Specimen {}, Thickness {}mm".format(
-                self.material, specimen + 1, self.filtered_df["Thickness_mm"].iloc[0]
+                self.material, specimen +
+                1, self.filtered_df["Thickness_mm"].iloc[0]
             ),
             family="Arial",
             fontsize="medium",
@@ -240,10 +247,14 @@ class TestingData:
 
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
+        print("Plotting Figure")
         fig = plt.figure()
+        print("Figure Created")
         ax = fig.add_subplot(111)
         self.formatChart(fig, ax, specimen)
+        print("Chart Formatted")
         fig.savefig(self.plotDirectory)
+        print("Chart Saved")
         plt.close(fig)
 
     # Called in process() function. Appends processed data for each specimen to processed_df Dataframe
@@ -344,7 +355,8 @@ class TestingData:
 
     # Called when class is initialized. Checks if checks if processed dataframe is generated and loads it to a database table.
     def output(self, material, db, user, pw, host):
-        engine = create_engine("mysql+pymysql://{}:{}@{}/{}".format(user, pw, host, db))
+        engine = create_engine(
+            "mysql+pymysql://{}:{}@{}/{}".format(user, pw, host, db))
         dbConnection = engine.connect()
 
         if self.processed_df.isnull().values.any():
@@ -376,4 +388,3 @@ class TestingData:
                 )
             finally:
                 dbConnection.close()
-

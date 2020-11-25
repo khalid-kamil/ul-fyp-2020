@@ -8,15 +8,9 @@
 # WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-import time
-import sys
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-import matplotlib
-import matplotlib.pyplot as plt
-
-matplotlib.use('TkAgg')
 
 
 class Ui_MainWindow(object):
@@ -136,14 +130,3 @@ class Ui_MainWindow(object):
         )
 
     # retranslateUi
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QApplication(sys.argv)
-    window = QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(window)
-    window.show()
-    app.exec_()

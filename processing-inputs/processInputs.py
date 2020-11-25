@@ -1,31 +1,31 @@
-from PySide2.QtWidgets import QApplication, QWidget
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
+from TestingData import TestingData
+from ui_processing import Ui_MainWindow
 import sys
-import time
+from TestingData import TestingData
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use('TkAgg')
+matplotlib.use('AGG')
 
 
-class Window(QWidget):
-    def __init__(self):
-        super().__init__()
+class ProcessingApp(Ui_MainWindow):
+    def __init__(self, window):
+        self.setupUi(window)
+        self.processButton.clicked.connect(self.processData)
 
-        self.setWindowTitle("Pyside2 Simple Appplication")
-        self.setGeometry(300, 300, 500, 400)
-        self.setMinimumHeight(100)
-        self.setMinimumWidth(250)
-        self.setMaximumHeight(200)
-        self.setMaximumWidth(800)
+    def processData(self):
+        test = TestingData(self.materialInput.toPlainText(
+        ), self.TestingDirectoryInput.toPlainText(), self.WeldingDirectoryInput.toPlainText(), self.bondAreaInput.toPlainText())
 
 
-myApp = QApplication(sys.argv)
-window = Window()
-window.show()
+app = QApplication(sys.argv)
+MainWindow = QMainWindow()
 
-time.sleep(3)
-window.resize(600, 400)
-# window.repaint()
+ui = ProcessingApp(MainWindow)
 
-myApp.exec_()
-sys.exit(0)
+MainWindow.show()
+
+app.exec_()
