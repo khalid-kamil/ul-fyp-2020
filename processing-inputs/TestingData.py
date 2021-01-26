@@ -306,8 +306,12 @@ class TestingData:
                 "Stiffness_N/mm",
                 "Max-Load_N",
                 "Work-To-Failure_Nmm",
+                "Predicted-Stiffness_N/mm",
+                "Predicted-Max-Load_N",
+                "Predicted-Work-To-Failure_Nmm",
                 "Plot-Directory",
                 "Test-Data-Directory",
+                "Model-Parameters-Directory"
             ]
         )
 
@@ -344,8 +348,12 @@ class TestingData:
                 "Stiffness_N/mm": self.stiffness,
                 "Max-Load_N": self.maxLoad,
                 "Work-To-Failure_Nmm": self.workToFailure,
+                "Predicted-Stiffness_N/mm": "",
+                "Predicted-Max-Load_N": "",
+                "Predicted-Work-To-Failure_Nmm": "",
                 "Plot-Directory": self.plotDirectory,
                 "Test-Data-Directory": self.testDataDirectory,
+                "Model-Parameters-Directory": ""
             }
 
             # Add processed data to new dataframe
