@@ -1,3 +1,5 @@
+import matplotlib
+# matplotlib.use('TkAgg')
 from matplotlib.ticker import AutoMinorLocator
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
@@ -10,8 +12,7 @@ from os import path
 
 # from extensions import *
 import pandas as pd
-import matplotlib
-matplotlib.use('TkAgg')
+
 
 
 plt.style.use("classic")
@@ -98,7 +99,6 @@ class TestingData:
                 "Force_N",
             ]
         )
-
         self.testing_df = self.testing_df.dropna(
             how="all").reset_index(drop=True)
         self.lastRowIndex = self.testing_df.last_valid_index()
@@ -144,15 +144,16 @@ class TestingData:
         self.testDataDirectory = "outputs/{} - Bond Area {}mm^2 - Cleaned.csv".format(
             self.material, self.bondarea
         )
+        
         self.cleaned_df.to_csv(self.testDataDirectory, index=False)
         print("Data cleaned successfully.")
 
     # Called in load() function. Loads data into dataframe once confirmed to exist using isValidDirectory() function.
     def loadToDataframe(self, source, welding):
         self.testing_df = pd.read_excel(
-            source, sheet_name=0, header=None, names=["Column 1", "Column 2"]
+            source, sheet_name=0, header=None, usecols=[0,1], names=["Column 1", "Column 2"]
         )
-
+        print(self.testing_df)
         self.cleanTestingData()
         self.specimenCount = self.cleaned_df["Specimen_no"].nunique()
         print("Number of specimens found: {}".format(self.specimenCount))
