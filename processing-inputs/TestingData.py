@@ -1,18 +1,21 @@
+import matplotlib
+# matplotlib.use('TkAgg')
+from matplotlib.ticker import AutoMinorLocator
+import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
+import pymysql
+from numpy import trapz
+import numpy as np
 import sys
 import os
 from os import path
 
 # from extensions import *
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.ticker import AutoMinorLocator
+
+
 
 plt.style.use("classic")
-
-import numpy as np
-from numpy import trapz
-import pymysql
-from sqlalchemy import create_engine
 
 
 class TestingData:
@@ -43,6 +46,7 @@ class TestingData:
         material,
         source,
         welding,
+        bondarea,
         db="materialtestsDB",
         user="khalid",
         pw="fyp2020",
@@ -63,6 +67,7 @@ class TestingData:
         self.material = material
         self.source = source
         self.welding = welding
+        self.bondarea = int(bondarea)
         self.db = db
         self.user = user
         self.pw = pw
@@ -94,8 +99,8 @@ class TestingData:
                 "Force_N",
             ]
         )
-
-        self.testing_df = self.testing_df.dropna(how="all").reset_index(drop=True)
+        self.testing_df = self.testing_df.dropna(
+            how="all").reset_index(drop=True)
         self.lastRowIndex = self.testing_df.last_valid_index()
         self.index_df = self.testing_df[
             self.testing_df.iloc[:, 0] == "Curves for Specimen No:"
@@ -131,21 +136,24 @@ class TestingData:
                 }
 
                 self.cleaned_df = self.cleaned_df.append(
-                    cleanedRow,
-                    ignore_index=True,
-                )
+                    cleanedRow, ignore_index=True)
 
         self.cleaned_df = self.cleaned_df.dropna(
             subset=["Extension_mm", "Force_N"], how="all"
         ).reset_index(drop=True)
+        self.testDataDirectory = "outputs/{} - Bond Area {}mm^2 - Cleaned.csv".format(
+            self.material, self.bondarea
+        )
+        
+        self.cleaned_df.to_csv(self.testDataDirectory, index=False)
         print("Data cleaned successfully.")
 
     # Called in load() function. Loads data into dataframe once confirmed to exist using isValidDirectory() function.
     def loadToDataframe(self, source, welding):
         self.testing_df = pd.read_excel(
-            source, sheet_name=0, header=None, names=["Column 1", "Column 2"]
+            source, sheet_name=0, header=None, usecols=[0,1], names=["Column 1", "Column 2"]
         )
-
+        print(self.testing_df)
         self.cleanTestingData()
         self.specimenCount = self.cleaned_df["Specimen_no"].nunique()
         print("Number of specimens found: {}".format(self.specimenCount))
@@ -164,7 +172,8 @@ class TestingData:
         self.initialLoad = np.array(
             self.filtered_df["Force_N"][: self.initialLength], dtype=np.float64
         )
-        self.fit = np.polyfit(self.initialDisplacement, self.initialLoad, 1, cov=True)
+        self.fit = np.polyfit(self.initialDisplacement,
+                              self.initialLoad, 1, cov=True)
         return round(self.fit[0][0], 3)
 
     # Called in process() function. Calculates max load for any one specimen.
@@ -174,76 +183,79 @@ class TestingData:
     # Called in process() function. Calculates work to failure for any one specimen.
     def calculateWorkToFailure(self):
         return round(
-            trapz(self.filtered_df["Force_N"], self.filtered_df["Extension_mm"]), 3
+            trapz(self.filtered_df["Force_N"],
+                  self.filtered_df["Extension_mm"]), 3
         )
 
     def formatChart(self, fig, ax, specimen):
+        ax.grid(color="#000000", linestyle="-", linewidth=0.5, alpha=0.3)
+        ax.set_xlabel(
+            "Extension (mm)", family="Arial", fontsize="medium", fontweight="semibold"
+        )
+        ax.set_ylabel(
+            "Load (N)", family="Arial", fontsize="medium", fontweight="semibold"
+        )
+        ax.set_title(
+            "Ultrasonic Welded Joint Test\n{} - Specimen {}, Thickness {}mm".format(
+                self.material, specimen +
+                1, self.filtered_df["Thickness_mm"].iloc[0]
+            ),
+            family="Arial",
+            fontsize="medium",
+            fontweight="semibold",
+        )
+        ax.set(
+            xlim=(0, 1.1 * self.filtered_df["Extension_mm"].max()),
+            ylim=(0, 1.1 * self.filtered_df["Force_N"].max()),
+        )
+        ax.xaxis.set_minor_locator(AutoMinorLocator())
+        ax.yaxis.set_minor_locator(AutoMinorLocator())
+        ax.tick_params(labelsize="small")
+
+        ax.fill_between(
+            self.filtered_df.Extension_mm.astype(float),
+            self.filtered_df.Force_N.astype(float),
+            color="#a8dadc",
+            alpha=0.5,
+            label="Work to Failure = {} Mmm".format(self.workToFailure),
+        )
         ax.scatter(
             self.filtered_df["Extension_mm"],
             self.filtered_df["Force_N"],
-            color="#4290f5",
-            alpha=0.4,
+            s=4,
+            color="#457b9d",
+            marker="D",
+            label="Load-Displacement",
+            # White Color Hex: #f1faee
         )
         ax.scatter(
             self.filtered_df["Extension_mm"][self.maxLoadId],
             self.filtered_df["Force_N"][self.maxLoadId],
-            color="red",
-            # label="Max. Load = {} N".format(self.maxLoad),
+            color="#e63946",
+            label="Max. Load = {} N".format(self.maxLoad),
         )
-        # ax.fill_between(
-        #     self.filtered_df["Extension_mm"],
-        #     self.filtered_df["Force_N"],
-        #     0,
-        #     color="#4290f5",
-        #     alpha=0.2,
-        #     label="Work to Failure = {} Nmm".format(self.workToFailure),
-        # )
         best_fit_y = self.fit[0][0] * self.initialDisplacement + self.fit[0][1]
-        plt.plot(
+        ax.plot(
             self.initialDisplacement,
             best_fit_y,
             "k",
-            color="blue",
+            color="#1d3557",
             linewidth=2,
-            # label="Stiffness = {} N/mm".format(self.stiffness),
-        )
-        # Set plot labels and axis labels
-        ax.set(
-            title="Ultrasonic Welded Joint Test\n{} - Specimen {}".format(
-                self.material, specimen + 1
-            ),
-            xlabel="Extension (mm)",
-            ylabel="Force (N)",
-        )
-        plt.xlim(
-            0,
-            self.filtered_df["Extension_mm"].max()
-            + 0.1 * self.filtered_df["Extension_mm"].max(),
-        )
-        plt.ylim(
-            0,
-            self.filtered_df["Force_N"].max() + 0.1 * self.filtered_df["Force_N"].max(),
+            label="Stiffness = {} N/mm".format(self.stiffness),
         )
 
-        # hide top and right ticks
-        plt.axes().xaxis.tick_bottom()
-        plt.axes().yaxis.tick_left()
-        plt.grid(which="major", axis="both")
-        plt.axes().xaxis.set_minor_locator(AutoMinorLocator())
-        plt.axes().yaxis.set_minor_locator(AutoMinorLocator())
-        plt.axes().tick_params(axis="both", which="major", labelsize="small")
-        plt.legend(loc="upper left", fontsize="small", scatterpoints=1)
+        ax.legend(loc="upper left", fontsize="x-small")
 
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
+        print("Plotting Figure")
         fig = plt.figure()
-        ax = fig.add_subplot(
-            111,
-        )
-
+        print("Figure Created")
+        ax = fig.add_subplot(111)
         self.formatChart(fig, ax, specimen)
-
+        print("Chart Formatted")
         fig.savefig(self.plotDirectory)
+        print("Chart Saved")
         plt.close(fig)
 
     # Called in process() function. Appends processed data for each specimen to processed_df Dataframe
@@ -284,20 +296,18 @@ class TestingData:
         self.processed_df = pd.DataFrame(
             columns=[
                 "Specimen_no",
-                "Curve_no",
                 "Thickness_mm",
-                "Width_mm",
+                "Welding-Energy_J",
+                "Vibration-Amplitude_\u03BCm",
+                "Clamping-Pressure_MPa",
+                "Peak-Power_W",
+                "Collapse_mm",
+                "Time_s",
                 "Stiffness_N/mm",
                 "Max-Load_N",
                 "Work-To-Failure_Nmm",
                 "Plot-Directory",
-                "Welding-Conditions",
-                "Welding-Energy",
-                "Vibration-Amplitude",
-                "Clamping-Pressure",
-                "Peak-Power",
-                "Collapse",
-                "Time",
+                "Test-Data-Directory",
             ]
         )
 
@@ -308,6 +318,7 @@ class TestingData:
             self.filtered_df = self.cleaned_df.loc[
                 self.cleaned_df["Specimen_no"] == specimen + 1
             ].reset_index(drop=True)
+            print(self.filtered_df.info())
 
             # Calculate stiffness, max load and work to failure for individual specimen
             self.stiffness = self.calculateStiffness()
@@ -315,28 +326,26 @@ class TestingData:
             self.workToFailure = self.calculateWorkToFailure()
 
             # Specify plot name and directory
-            self.plotName = "Load-Displacement Chart - Specimen {}.png".format(
-                specimen + 1
+            self.plotName = "Load-Displacement Chart - Specimen {} - Thickness {}mm.png".format(
+                specimen + 1, self.filtered_df["Thickness_mm"].iloc[0]
             )
             self.plotDirectory = "outputs/plots/{}".format(self.plotName)
 
             # Load processed data into object to append to processed dataframe
             self.processedData = {
                 "Specimen_no": self.filtered_df["Specimen_no"].iloc[0],
-                "Curve_no": self.filtered_df["Curve_no"].iloc[0],
                 "Thickness_mm": self.filtered_df["Thickness_mm"].iloc[0],
-                "Width_mm": self.filtered_df["Width_mm"].iloc[0],
+                "Welding-Energy_J": self.welding_df.iloc[specimen][1],
+                "Vibration-Amplitude_\u03BCm": self.welding_df.iloc[specimen][2],
+                "Clamping-Pressure_MPa": self.welding_df.iloc[specimen][3],
+                "Peak-Power_W": self.welding_df.iloc[specimen][4],
+                "Collapse_mm": self.welding_df.iloc[specimen][5],
+                "Time_s": self.welding_df.iloc[specimen][6],
                 "Stiffness_N/mm": self.stiffness,
                 "Max-Load_N": self.maxLoad,
                 "Work-To-Failure_Nmm": self.workToFailure,
                 "Plot-Directory": self.plotDirectory,
-                "Welding-Conditions": self.welding_df.iloc[specimen][0],
-                "Welding-Energy": self.welding_df.iloc[specimen][1],
-                "Vibration-Amplitude": self.welding_df.iloc[specimen][2],
-                "Clamping-Pressure": self.welding_df.iloc[specimen][3],
-                "Peak-Power": self.welding_df.iloc[specimen][4],
-                "Collapse": self.welding_df.iloc[specimen][5],
-                "Time": self.welding_df.iloc[specimen][6],
+                "Test-Data-Directory": self.testDataDirectory,
             }
 
             # Add processed data to new dataframe
@@ -347,7 +356,8 @@ class TestingData:
 
     # Called when class is initialized. Checks if checks if processed dataframe is generated and loads it to a database table.
     def output(self, material, db, user, pw, host):
-        engine = create_engine(f"mysql+pymysql://{user}:{pw}@{host}/{db}")
+        engine = create_engine(
+            "mysql+pymysql://{}:{}@{}/{}".format(user, pw, host, db))
         dbConnection = engine.connect()
 
         if self.processed_df.isnull().values.any():
@@ -355,7 +365,11 @@ class TestingData:
         else:
             try:
                 frame = self.processed_df.to_sql(
-                    self.material,
+                    "{} - Bond Area {}mm^2 - Thickness {}mm".format(
+                        self.material,
+                        self.bondarea,
+                        self.processed_df["Thickness_mm"].iloc[0],
+                    ),
                     con=dbConnection,
                     if_exists="append",
                     chunksize=1000,
@@ -366,11 +380,12 @@ class TestingData:
             except Exception as ex:
                 print(ex)
             else:
-                print("Data added to Table '{}' successfully.".format(self.material))
+                print(
+                    "Data added to Table '{} - Bond Area {}mm^2 - Thickness {}mm' successfully.".format(
+                        self.material,
+                        self.bondarea,
+                        self.processed_df["Thickness_mm"].iloc[0],
+                    )
+                )
             finally:
                 dbConnection.close()
-
-
-test = TestingData(
-    "Aluminium 5754-H111", "refData/Testing-Data.xlsx", "refData/Welding data.xlsx"
-)

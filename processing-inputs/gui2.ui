@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>674</width>
+    <height>479</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+
+QPushButton {
+    border-radius: 4px;
+	background-color: #80cbc4;
+	box-shadow: 4px, 4px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>Data Processing</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="11" column="3">
+            <widget class="QLabel" name="chartOutputLabel">
+             <property name="text">
+              <string>Chart Output:</string>
+             </property>
+             <property name="buddy">
+              <cstring>chartOutput</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="4">
+            <widget class="QLineEdit" name="host">
+             <property name="text">
+              <string>localhost</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="testingDataLabel">
+             <property name="text">
+              <string>Testing Data:</string>
+             </property>
+             <property name="buddy">
+              <cstring>testingData</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <widget class="QLineEdit" name="database">
+             <property name="text">
+              <string>materialtestsDB</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="4">
+            <widget class="QLineEdit" name="chartOutput">
+             <property name="text">
+              <string>outputs/plots</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="materialLabel">
+             <property name="text">
+              <string>Material:</string>
+             </property>
+             <property name="buddy">
+              <cstring>material</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QLabel" name="databaseLabel">
+             <property name="text">
+              <string>Database:</string>
+             </property>
+             <property name="buddy">
+              <cstring>database</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="bondAreaLabel">
+             <property name="text">
+              <string>Bond Area:</string>
+             </property>
+             <property name="buddy">
+              <cstring>bondArea</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="material">
+             <property name="text">
+              <string>Aluminium 5754-H111</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="bondArea">
+             <property name="maximum">
+              <number>1000</number>
+             </property>
+             <property name="value">
+              <number>180</number>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="testingData">
+             <property name="text">
+              <string>refData/Testing-Data.xlsx</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="3">
+            <widget class="QLabel" name="userLabel">
+             <property name="text">
+              <string>User:</string>
+             </property>
+             <property name="buddy">
+              <cstring>user</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="3">
+            <widget class="QLabel" name="passwordLabel">
+             <property name="text">
+              <string>Password:</string>
+             </property>
+             <property name="buddy">
+              <cstring>password</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QLineEdit" name="user">
+             <property name="text">
+              <string>khalid</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="3">
+            <widget class="QLabel" name="hostLabel">
+             <property name="text">
+              <string>Host:</string>
+             </property>
+             <property name="buddy">
+              <cstring>host</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="15" column="4">
+            <widget class="QPushButton" name="processDataButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Process Data</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="4">
+            <widget class="QLineEdit" name="password">
+             <property name="inputMethodHints">
+              <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+             </property>
+             <property name="text">
+              <string>fyp2020</string>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="weldingDataLabel">
+             <property name="text">
+              <string>Welding Data:</string>
+             </property>
+             <property name="buddy">
+              <cstring>weldingData</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="weldingData">
+             <property name="text">
+              <string>refData/Welding data.xlsx</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3" colspan="2">
+            <widget class="QLabel" name="outputDetailsHeading">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>OUTPUT DETAILS</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="13" column="4">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QLabel" name="inputDetailsHeading">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>INPUT DETAILS</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="5">
+            <widget class="QLabel" name="tab1Heading">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>USW DATA PROCESSING</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="0" colspan="5">
+            <widget class="QLabel" name="errorLabel">
+             <property name="styleSheet">
+              <string notr="true">
+</string>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#fc2b2d;&quot;&gt;Error Label&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>Machine Learning</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="tab2Heading">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>USW MACHNINE LEARNING</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>674</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>material</tabstop>
+  <tabstop>bondArea</tabstop>
+  <tabstop>testingData</tabstop>
+  <tabstop>weldingData</tabstop>
+  <tabstop>database</tabstop>
+  <tabstop>host</tabstop>
+  <tabstop>user</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>chartOutput</tabstop>
+  <tabstop>processDataButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
