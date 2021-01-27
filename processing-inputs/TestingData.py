@@ -168,12 +168,13 @@ class TestingData:
         y1 = self.filtered_df["Force_N"][0]
         x2 = self.filtered_df["Extension_mm"][20]
         y2 = self.filtered_df["Force_N"][20]
-        slope = (y2-y1)/(x2-x1)
+        self.slope = (y2-y1)/(x2-x1)
         # Find  using using (x1,y1) and slope
-        c = y1 - slope*x1
+        self.c = y1 - self.slope*x1
+        
         # Find the x-intercept by putting y=0
         y = 0
-        x = (y-c)/slope
+        x = (y-self.c)/self.slope
         specimenNo = self.filtered_df["Specimen_no"][0]
         curveNo = self.filtered_df["Curve_no"][0]
         thickness = self.filtered_df["Thickness_mm"][0]
@@ -197,6 +198,7 @@ class TestingData:
         )
         self.fit = np.polyfit(self.initialDisplacement,
                               self.initialLoad, 1, cov=True)
+        
         return round(self.fit[0][0], 3)
 
     # Called in process() function. Calculates max load for any one specimen.
@@ -258,13 +260,25 @@ class TestingData:
             label="Max. Load = {} N".format(self.maxLoad),
         )
         best_fit_y = self.fit[0][0] * self.initialDisplacement + self.fit[0][1]
-        ax.plot(
-            self.initialDisplacement,
-            best_fit_y,
-            "k",
-            color="#1d3557",
+        
+        xvals = np.array(self.filtered_df["Extension_mm"][: 20], dtype=np.float64)
+        yvals = self.c + self.slope * xvals
+        ax.plot(xvals, 
+            yvals,
+            "r",
+            # color="#1d3557",
             linewidth=2,
             label="Stiffness = {} N/mm".format(self.stiffness),
+        )
+        self.c2 = 0 - self.slope*(self.filtered_df["Extension_mm"][0]+0.002 * self.filtered_df["Extension_mm"][self.maxLoadId])
+        xvals2 = xvals + 0.002 * self.filtered_df["Extension_mm"][self.maxLoadId]
+        yvals2 = self.c2 + self.slope * xvals2
+        ax.plot(xvals2, 
+            yvals2,
+            "y",
+            # color="#1d3557",
+            linewidth=2,
+            # label="Stiffness = {} N/mm".format(self.stiffness),
         )
         ax.spines["left"].set_position(("data", 0))
 
