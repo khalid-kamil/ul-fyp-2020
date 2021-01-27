@@ -162,6 +162,29 @@ class TestingData:
         self.welding_df = self.welding_df[1:].reset_index(drop=True)
         self.welding_df.columns = weldingHeader
 
+    # Called in process() function calculates x intercept from initial slope and prepends point to dataframe
+    def managePreLoad(self, specimen):
+        x1 = self.filtered_df["Extension_mm"][0]
+        y1 = self.filtered_df["Force_N"][0]
+        x2 = self.filtered_df["Extension_mm"][20]
+        y2 = self.filtered_df["Force_N"][20]
+        slope = (y2-y1)/(x2-x1)
+        # Find  using using (x1,y1) and slope
+        c = y1 - slope*x1
+        # Find the x-intercept by putting y=0
+        y = 0
+        x = (y-c)/slope
+        specimenNo = self.filtered_df["Specimen_no"][0]
+        curveNo = self.filtered_df["Curve_no"][0]
+        thickness = self.filtered_df["Thickness_mm"][0]
+        width = self.filtered_df["Width_mm"][0]
+        newRow = pd.DataFrame({"Specimen_no": specimenNo, "Curve_no": curveNo, "Thickness_mm": thickness, "Width_mm": width, "Extension_mm": x, "Force_N": y }, index =[0])
+        self.filtered_df = pd.concat([newRow, self.filtered_df]).reset_index(drop = True)
+
+
+
+
+    
     # Called in process() function. Calculates stiffness for any one specimen.
     def calculateStiffness(self, initialExtension=0.2):
         self.maxLoadId = self.filtered_df["Force_N"].astype(float).idxmax()
@@ -205,8 +228,8 @@ class TestingData:
             fontweight="semibold",
         )
         ax.set(
-            xlim=(0, 1.1 * self.filtered_df["Extension_mm"].max()),
-            ylim=(0, 1.1 * self.filtered_df["Force_N"].max()),
+            xlim=(self.filtered_df["Extension_mm"].min(), 1.1 * self.filtered_df["Extension_mm"].max()),
+            ylim=(self.filtered_df["Extension_mm"].min(), 1.1 * self.filtered_df["Force_N"].max()),
         )
         ax.xaxis.set_minor_locator(AutoMinorLocator())
         ax.yaxis.set_minor_locator(AutoMinorLocator())
@@ -243,8 +266,9 @@ class TestingData:
             linewidth=2,
             label="Stiffness = {} N/mm".format(self.stiffness),
         )
+        ax.spines["left"].set_position(("data", 0))
 
-        ax.legend(loc="upper left", fontsize="x-small")
+        ax.legend(loc="upper left", bbox_to_anchor=(0.12, 1.0), fontsize="x-small")
 
     # Called in process() function. Generates Load-Displacement charts for each specimen.
     def plotFigure(self, specimen):
@@ -306,8 +330,12 @@ class TestingData:
                 "Stiffness_N/mm",
                 "Max-Load_N",
                 "Work-To-Failure_Nmm",
+                "Predicted-Stiffness_N/mm",
+                "Predicted-Max-Load_N",
+                "Predicted-Work-To-Failure_Nmm",
                 "Plot-Directory",
                 "Test-Data-Directory",
+                "Model-Parameters-Directory"
             ]
         )
 
@@ -318,7 +346,11 @@ class TestingData:
             self.filtered_df = self.cleaned_df.loc[
                 self.cleaned_df["Specimen_no"] == specimen + 1
             ].reset_index(drop=True)
-            print(self.filtered_df.info())
+            print(self.filtered_df.head())
+
+            # Manage Preload
+            self.managePreLoad(specimen)
+            print(self.filtered_df.head())
 
             # Calculate stiffness, max load and work to failure for individual specimen
             self.stiffness = self.calculateStiffness()
@@ -344,8 +376,12 @@ class TestingData:
                 "Stiffness_N/mm": self.stiffness,
                 "Max-Load_N": self.maxLoad,
                 "Work-To-Failure_Nmm": self.workToFailure,
+                "Predicted-Stiffness_N/mm": "",
+                "Predicted-Max-Load_N": "",
+                "Predicted-Work-To-Failure_Nmm": "",
                 "Plot-Directory": self.plotDirectory,
                 "Test-Data-Directory": self.testDataDirectory,
+                "Model-Parameters-Directory": ""
             }
 
             # Add processed data to new dataframe
